@@ -7,20 +7,30 @@ export class YataInfrastructureStack extends cdk.Stack {
 
     const listTable = new dynamo.Table(this, 'ListTable', {
       partitionKey: {
-        name: "UserId",
+        name: "UserID",
+        type: dynamo.AttributeType.STRING
+      },
+      sortKey: {
+        name: "ListID",
         type: dynamo.AttributeType.STRING
       },
       readCapacity: 1,
-      writeCapacity: 1
+      writeCapacity: 1,
+      tableName: "ListTable"
     });
 
     const listItemTable = new dynamo.Table(this, 'ListItemTable', {
       partitionKey: {
-        name: "ListId",
+        name: "ListID",
+        type: dynamo.AttributeType.STRING
+      },
+      sortKey: {
+        name: "ItemID",
         type: dynamo.AttributeType.STRING
       },
       readCapacity: 1,
-      writeCapacity: 1
+      writeCapacity: 1,
+      tableName: "ListItemTable"
     });  
   }
 }
